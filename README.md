@@ -1,3 +1,3 @@
-# WIP version
+# mapping-tor
 
-Refer to [v0.0.1](https://github.com/MattAndDev/gulp-boilerplate/tree/v0.0.1)
+A very small experiment to map the geolocation of TOR exit nodes.
