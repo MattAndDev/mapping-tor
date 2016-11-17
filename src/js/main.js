@@ -1,6 +1,11 @@
+// import libs
+import _ from 'lodash'
 // import utils
 import runtime from './utils/runtime'
 import settings from './utils/settings'
+
+// import data
+import locations from './data/locations'
 
 // $.ready
 let domReady = function (callback) {
@@ -9,11 +14,9 @@ let domReady = function (callback) {
 
 domReady(() => {
 
-  // example settings listeers
-  settings.on('resize', () => {})
-  settings.on('scroll', () => {})
-  settings.on('mousemove', (e) => {})
+  var uniqueLocations = _.uniqBy(locations, (location) => {
+    return [location.lat, location.lon].join()
+  })
 
-  // do some magic
 
 })
