@@ -5,7 +5,7 @@ let fs = require('fs')
 
 let jsonfile = require('jsonfile')
 
-module.exports = class Logger extends EventEmitter {
+class Logger extends EventEmitter {
 
   constructor () {
     super()
@@ -13,13 +13,13 @@ module.exports = class Logger extends EventEmitter {
 
   write (entry, file, cb) {
     jsonfile.readFile(file, function(err, obj) {
-      console.log(obj)
       obj.push(entry)
       jsonfile.writeFile(file, obj, {spaces: 2}, function(err) {
-        console.error(err)
-        cb()
+        this.emit('written')
       })
     })
   }
 
 }
+
+module.exports = new Logger()
