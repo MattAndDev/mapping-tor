@@ -8,6 +8,8 @@
 // require basics
 let http = require('http')
 let url = require('url')
+let path = require('path')
+let fs = require('fs')
 
 
 class Server {
@@ -20,18 +22,19 @@ class Server {
 
   bindListeners () {
     this.handler.on('request', (req, res) => {
+      var fileLoc = path.resolve('../public/')
+      fileLoc = path.join(fileLoc, req.url)
 
-      // get query paremeters and do seomthing with it
-      let params = url.parse(req.url, true).query
-
-      // default response text
-      let responseText = 'Hello my dear,  World\n'
-
-      // write response head
-      res.writeHead(200, {'Content-Type': 'text/plain'})
-      // die wwith response text
-      res.end(responseText)
-
+      fs.readFile(fileLoc, function(err, data) {
+        if (err) {
+          res.writeHead(404, 'Not Found')
+          res.write('404: File Not Found!')
+          return res.end()
+        }
+        res.statusCode = 200
+        res.write(data)
+        return res.end()
+      })
     })
 
     // listen to connection event
