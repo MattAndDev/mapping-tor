@@ -20,7 +20,7 @@ class Fetcher extends EventEmitter {
   }
 
   // makes request to apify to get current exit node
-  geLocalizeIp () {
+  getLocalizeIp () {
     tor.request({
       url:'http://ip-api.com/json',
       setTimeout: 6000
