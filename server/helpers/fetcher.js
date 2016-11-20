@@ -6,7 +6,6 @@
 
 let tor = require('tor-request')
 let exec = require('child_process').exec;
-let util = require('util')
 let env = require('../.env.json')
 let EventEmitter = require('events').EventEmitter
 
