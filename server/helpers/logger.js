@@ -13,13 +13,13 @@ class Logger extends EventEmitter {
 
   write (entry, file) {
     jsonfile.readFile(file, (err, obj) => {
-      console.log(obj)
       obj.push(entry)
       jsonfile.writeFile(file, obj, {spaces: 2}, (err) => {
         this.emit('written')
       })
     })
   }
+
 
 }
 
