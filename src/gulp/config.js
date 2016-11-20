@@ -1,4 +1,4 @@
-var dest = './dist'
+var dest = '../public'
 var src = './src'
 
 export default {
@@ -144,7 +144,7 @@ export default {
           render: {
             scss: {
               template: 'gulp/tpl/_sprite-inline.scss',
-              dest: '../../src/sass/_sprite.scss'
+              dest: '../../src/src/sass/_sprite.scss'
             }
           }
         }
