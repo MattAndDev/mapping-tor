@@ -6,13 +6,20 @@
 
 let logger = require('./helpers/logger')
 let fetcher = require('./helpers/fetcher')
+let server = require('./helpers/server')
 
 
 class MappingTor {
 
   init () {
-    fetcher.getLocalizeIp()
-    this.addListeners()
+    // fetcher.getLocalizeIp()
+    // this.addListeners()
+    server.init()
+  }
+
+
+  startServer () {
+
   }
 
   addListeners () {
