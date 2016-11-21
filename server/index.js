@@ -17,12 +17,10 @@ class MappingTor {
     db.insertCollection('locations', (collection) => {
       console.log(collection)
     })
-    db.readCollection('locations', (collection) => {
+
+    db.deleteCollection('locations', (collection) => {
       console.log(collection)
     })
-    // db.deleteCollection('locations', (collection) => {
-    //   console.log(collection)
-    // })
   }
 
 
@@ -34,7 +32,7 @@ class MappingTor {
     fetcher.on('fetched', (err, entry) => {
       console.log(err, entry)
       if (!err) {
-        logger.write(entry, './log.json')
+        this.handleNewExitNode(entry)
       }
       else {
         fetcher.requestNewExitNode()
@@ -49,6 +47,18 @@ class MappingTor {
     logger.on('written', () => {
       console.log('written')
       fetcher.requestNewExitNode()
+    })
+  }
+
+
+  // TODO move on here :D
+  handleNewExitNode (entry) {
+    db.readCollection('locations', (collection) => {
+      let check = _.find(cleanLocations, (o) => {  return o.ip === entry.ip;})
+      // if entry does not exist
+      if (typeof check !=== 'undefined') {
+        db.insertCollection(entry)
+      }
     })
   }
 
