@@ -4,10 +4,9 @@
 // Mapping tor
 // =========================================
 
-let logger = require('./helpers/logger')
 let fetcher = require('./helpers/fetcher')
 let server = require('./helpers/server')
-
+let db = require('./helpers/db')
 
 class MappingTor {
 
@@ -15,6 +14,12 @@ class MappingTor {
     // fetcher.getLocalizeIp()
     // this.addListeners()
     server.init()
+    db.insertCollection('collection', (collection) => {
+      console.log(collection)
+    })
+    db.getCollection('location', (collection) => {
+      console.log(collection)
+    })
   }
 
 
