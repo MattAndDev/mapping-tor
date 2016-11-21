@@ -27,7 +27,7 @@ class Db extends EventEmitter {
     })
   }
 
-  getCollection (name, cb) {
+  readCollection (name, cb) {
     this.openConnection(() => {
       let collection = this.db.collection(name);
        collection.find({}).toArray((err, docs) => {
@@ -35,22 +35,30 @@ class Db extends EventEmitter {
          this.db.close()
          return false
        })
-
      })
   }
 
-  insertCollection(name, cb) {
+  insertCollection(name, array, cb) {
     this.openConnection(() => {
       let collection = this.db.collection(name);
-      collection.insertMany(cleanLocations, (err, result) => {
-        console.log("Inserted 3 documents into the collection");
+      collection.insertMany(array, (err, result) => {
         cb(result);
+        this.db.close()
       });
     })
   }
 
+  deleteCollection(name, cb) {
+    this.openConnection(() => {
+      let collection = this.db.collection(name);
+      collection.remove({})
+      this.db.close()
+      return false
+    })
+  }
 
-
+  // Kept in case original raw data needs to be restored
+  // traversing array of object, get's matching by ip, and counts
   _cleanUpLogfiles () {
     let cleanLocations = []
     _.sortBy(locations, (location, index) => {
@@ -73,9 +81,9 @@ class Db extends EventEmitter {
           entry.count = 1
         }
         entry.time = location.time
-        console.log(entry)
       }
     })
+    return cleanLocations
   }
 }
 

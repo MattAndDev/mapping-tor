@@ -14,12 +14,15 @@ class MappingTor {
     // fetcher.getLocalizeIp()
     // this.addListeners()
     server.init()
-    db.insertCollection('collection', (collection) => {
+    db.insertCollection('locations', (collection) => {
       console.log(collection)
     })
-    db.getCollection('location', (collection) => {
+    db.readCollection('locations', (collection) => {
       console.log(collection)
     })
+    // db.deleteCollection('locations', (collection) => {
+    //   console.log(collection)
+    // })
   }
 
 
