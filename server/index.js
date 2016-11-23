@@ -9,15 +9,10 @@ let server = require('./helpers/server')
 let db = require('./helpers/db')
 let env = require('./.env.json')
 
-console.log(env.application);
 
 class MappingTor {
 
   init () {
-    // fetcher.getLocalizeIp()
-    // this.addListeners()
-    console.log(process.env);
-
 
     // Switch collection base on application mode
     // use this to avoid always overriding the clean location
@@ -28,15 +23,7 @@ class MappingTor {
     }
 
     server.init()
-    // db.insertDevCollection( (collection) => {
-    //   console.log(collection)
-    // })
-    // db.readCollection('locations', (collection) => {
-    //   console.log(collection)
-    // })
-    // db.deleteCollection('locations', (collection) => {
-    //   console.log(collection)
-    // })
+
   }
 
 
