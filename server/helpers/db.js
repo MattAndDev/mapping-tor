@@ -25,6 +25,17 @@ class Db extends EventEmitter {
      })
   }
 
+
+  appendToCollection (name, entry, cb) {
+    let collection = this.db.collection(name);
+    console.log(collection.length);
+    collection.insert(entry, (err, result) => {
+      cb(result);
+      console.log(collection.length);
+      this.db.close()
+    });
+  }
+
   // insert an array into the passed collection
   // second param should be a valid array of json objects
   // cb once done with mongod data
@@ -60,6 +71,7 @@ class Db extends EventEmitter {
         this.db.close()
       });
     })
+  }
 
     // open conenction private helper
     // used to open up a port to mongod
