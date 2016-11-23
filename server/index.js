@@ -8,6 +8,7 @@ let fetcher = require('./helpers/fetcher')
 let server = require('./helpers/server')
 let db = require('./helpers/db')
 let env = require('./.env.json')
+let _  = require('lodash')
 
 
 class MappingTor {
@@ -23,7 +24,7 @@ class MappingTor {
     }
 
     server.init()
-
+    this.handleNewExitNode({test:'bitch'})
   }
 
 
@@ -56,11 +57,16 @@ class MappingTor {
 
   // TODO move on here :D
   handleNewExitNode (entry) {
-    db.readCollection('locations', (collection) => {
-      let check = _.find(cleanLocations, (o) => {  return o.ip === entry.ip;})
+    db.readCollection(this.collection, (collection) => {
+      let check = _.find(collection, (o) => {  return o.ip === entry.ip;})
       // if entry does not exist
+      console.log(check);
+      // use an update against the ip
       if (typeof check !== 'undefined') {
-        db.insertCollection(entry, (resul) => {
+      }
+      // insert new entry
+      else {
+        db.appendToCollection(this.collection, entry, (result) => {
           console.log(result);
         })
       }
