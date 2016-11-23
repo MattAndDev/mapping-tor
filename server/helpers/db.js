@@ -57,6 +57,18 @@ class Db extends EventEmitter {
     })
   }
 
+  insertDevCollection (cb) {
+    this.openConnection(() => {
+      let collection = this.db.collection('locations')
+      let cleanDevData = this._cleanUpLogfiles()
+      collection.insertMany(cleanDevData, (err, result) => {
+        cb(result);
+        this.db.close()
+      });
+    })
+
+  }
+
   // Kept in case original raw data needs to be restored
   // traversing array of object, get's matching by ip, and counts
   _cleanUpLogfiles () {
