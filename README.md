@@ -8,7 +8,16 @@ A very small experiment to map the geolocation of TOR exit nodes.
 ## mapping-tor/src
 Contains a gulp builder to create public files under ```./public```
 
-
-
 ## mapping-tor/server
 basic node server, fetches geolocation of different tor exit ndoes and will serve the public folder
+
+
+### Dependencies
+ - tor
+  - config
+    - ip address
+    - port
+    - hash password for port control
+- MongoDB
+  - config
+    - endpoint
