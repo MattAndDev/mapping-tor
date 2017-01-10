@@ -9,8 +9,12 @@ let exec = require('child_process').exec;
 let env = require('../.env.json')
 let EventEmitter = require('events').EventEmitter
 
-
+// Set tor env variables
+tor.setTorAddress(env.tor.host, env.tor.port)
 tor.TorControlPort.password = env.tor.pwd
+tor.TorControlPort.host = env.tor.host
+tor.TorControlPort.port = env.tor.controlPort
+
 
 class Fetcher extends EventEmitter {
 
@@ -20,9 +24,10 @@ class Fetcher extends EventEmitter {
 
   // makes request to apify to get current exit node
   getLocalizeIp () {
+
     tor.request({
       url:'http://ip-api.com/json',
-      setTimeout: 6000
+      timeout: 1000
     },
     (err, res, body) =>  {
       // if everything is fine
@@ -41,13 +46,12 @@ class Fetcher extends EventEmitter {
         this.emit('fetched', err, false)
       }
     })
-    .on('timeout', (err) => {
-      this.emit('timeout', err, false)
-    })
   }
 
   requestNewExitNode (cb) {
+    // Set tor env variables
     tor.renewTorSession((done) => {
+      console.log(done);
       this.emit('newExitNode')
     })
   }

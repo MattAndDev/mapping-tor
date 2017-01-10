@@ -25,6 +25,7 @@ class MappingTor {
 
     server.init()
     this.handleNewExitNode({test:'bitch'})
+    this.addListeners()
   }
 
 
@@ -37,6 +38,7 @@ class MappingTor {
       console.log(err, entry)
       if (!err) {
         this.handleNewExitNode(entry)
+        fetcher.requestNewExitNode()
       }
       else {
         fetcher.requestNewExitNode()
@@ -44,14 +46,15 @@ class MappingTor {
     })
 
     fetcher.on('newExitNode', () => {
-      console.log('new node')
       fetcher.getLocalizeIp()
     })
 
-    logger.on('written', () => {
-      console.log('written')
-      fetcher.requestNewExitNode()
-    })
+    fetcher.requestNewExitNode()
+
+    // logger.on('written', () => {
+    //   console.log('written')
+    //   fetcher.requestNewExitNode()
+    // })
   }
 
 
