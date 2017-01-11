@@ -38,10 +38,10 @@ class MappingTor {
       console.log(err, entry)
       if (!err) {
         this.handleNewExitNode(entry)
-        fetcher.requestNewExitNode()
+        fetcher.scheduleNewExitNode()
       }
       else {
-        fetcher.requestNewExitNode()
+        fetcher.scheduleNewExitNode()
       }
     })
 
@@ -49,7 +49,7 @@ class MappingTor {
       fetcher.getLocalizeIp()
     })
 
-    fetcher.requestNewExitNode()
+    fetcher.scheduleNewExitNode()
 
     // logger.on('written', () => {
     //   console.log('written')
@@ -63,14 +63,14 @@ class MappingTor {
     db.readCollection(this.collection, (collection) => {
       let check = _.find(collection, (o) => {  return o.ip === entry.ip;})
       // if entry does not exist
-      console.log(check);
+      // console.log(check);
       // use an update against the ip
       if (typeof check !== 'undefined') {
       }
       // insert new entry
       else {
         db.appendToCollection(this.collection, entry, (result) => {
-          console.log(result);
+          // console.log(result);
         })
       }
     })

@@ -20,6 +20,7 @@ class Fetcher extends EventEmitter {
 
   constructor () {
     super()
+    this.requestNodeInterval = 60000
   }
 
   // makes request to apify to get current exit node
@@ -48,10 +49,22 @@ class Fetcher extends EventEmitter {
     })
   }
 
-  requestNewExitNode (cb) {
+  scheduleNewExitNode () {
+    let now = Date.now()
+    if (this.lastNodeRequest && now - this.requestNodeInterval < this.lastNodeRequest ) {
+      let timeout = this.lastNodeRequest - (now - this.requestNodeInterval)
+      setTimeout(() => {
+        this.requestNewExitNode()
+      }, timeout)
+    } else {
+      this.requestNewExitNode()
+    }
+    this.lastNodeRequest = Date.now()
+  }
+
+  requestNewExitNode () {
     // Set tor env variables
     tor.renewTorSession((done) => {
-      console.log(done);
       this.emit('newExitNode')
     })
   }
