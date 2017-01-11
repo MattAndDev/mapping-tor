@@ -23,19 +23,16 @@ class MappingTor {
       this.collection = 'locations'
     }
 
+    // init the server
     server.init()
-    this.handleNewExitNode({test:'bitch'})
+    fetcher.init()
+
     this.addListeners()
-  }
-
-
-  startServer () {
-
   }
 
   addListeners () {
     fetcher.on('fetched', (err, entry) => {
-      console.log(err, entry)
+      console.log(entry);
       if (!err) {
         this.handleNewExitNode(entry)
         fetcher.scheduleNewExitNode()
@@ -44,17 +41,6 @@ class MappingTor {
         fetcher.scheduleNewExitNode()
       }
     })
-
-    fetcher.on('newExitNode', () => {
-      fetcher.getLocalizeIp()
-    })
-
-    fetcher.scheduleNewExitNode()
-
-    // logger.on('written', () => {
-    //   console.log('written')
-    //   fetcher.requestNewExitNode()
-    // })
   }
 
 
@@ -63,7 +49,7 @@ class MappingTor {
     db.readCollection(this.collection, (collection) => {
       let check = _.find(collection, (o) => {  return o.ip === entry.ip;})
       // if entry does not exist
-      // console.log(check);
+      console.log(check);
       // use an update against the ip
       if (typeof check !== 'undefined') {
       }
