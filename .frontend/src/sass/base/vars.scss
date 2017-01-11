@@ -1,0 +1,108 @@
+//============================================
+// Global variables
+//============================================
+
+
+// Colors
+//============================================
+
+$primary:     #00F;
+$black:       #111;
+$white:       #FFFFFF;
+
+$gray:        #DDD;
+$gray-light:  #F7F7F7;
+$gray-dark:   #767676;
+
+// Pass on for semantics
+$color-text:  $black;
+$color-bg:    $white;
+
+
+// Dimensions
+//============================================
+
+$space:           24px;
+$space-half:      $space * 0.5;
+$space-quarter:   $space * 0.25;
+$space-duble:     $space * 2;
+$space-triple:    $space * 3;
+$space-quad:      $space * 4;
+
+
+// Typography
+//============================================
+
+$font:          "Helvetica Neue", Arial, sans-serif;
+$font-heading:  $font;
+$font-mono:     monospace, monospace;
+$font-size:     16px;
+$line-height:   ($space / $font-size);
+
+// Headings (responsive)
+// for in depth styling see defaults.sass
+//============================================
+
+$fs-xs-h1: 28px;
+$fs-sm-h1: 38px;
+$fs-md-h1: 48px;
+$fs-lg-h1: 58px;
+
+$fs-xs-h2: 24px;
+$fs-sm-h2: 26px;
+$fs-md-h2: 36px;
+$fs-lg-h2: 46px;
+
+$fs-xs-h3: 20px;
+$fs-sm-h3: 22px;
+$fs-md-h3: 30px;
+$fs-lg-h3: 30px;
+
+$fs-xs-h4: 18px;
+$fs-sm-h4: 20px;
+$fs-md-h4: 24px;
+$fs-lg-h4: 24px;
+
+$fs-xs-h5: 16px;
+$fs-sm-h5: 18px;
+$fs-md-h5: 20px;
+$fs-lg-h5: 22px;
+
+$fs-xs-h6: 16px;
+$fs-sm-h6: 16px;
+$fs-md-h6: 18px;
+$fs-lg-h6: 18px;
+
+
+// Layout
+//============================================
+
+// XS
+$layout-gutter-xs: 16px;
+$layout-width-xs:  416px;
+
+// SM
+$layout-gutter-sm: 20px;
+$layout-width-sm:  728px;
+
+// MD
+$layout-gutter-md: 22px;
+$layout-width-md:  966px;
+
+// LG
+$layout-gutter-lg: 30px;
+$layout-width-lg:  1290px;
+
+
+// Breakpoints
+//============================================
+
+$bp-xs:       "(min-width: #{$layout-width-xs + ($layout-gutter-xs * 2)})";
+$bp-sm:       "(min-width: #{$layout-width-sm + ($layout-gutter-sm * 2)})";
+$bp-md:       "(min-width: #{$layout-width-md + ($layout-gutter-md * 2)})";
+$bp-lg:       "(min-width: #{$layout-width-lg + ($layout-gutter-lg * 2)})";
+
+$bp-xs-down:  "(max-width: #{($layout-width-xs + ($layout-gutter-xs * 2)) - 1px})";
+$bp-sm-down:  "(max-width: #{($layout-width-sm + ($layout-gutter-sm * 2)) - 1px})";
+$bp-md-down:  "(max-width: #{($layout-width-md + ($layout-gutter-md * 2)) - 1px})";
+$bp-lg-down:  "(max-width: #{($layout-width-lg + ($layout-gutter-lg * 2)) - 1px})";

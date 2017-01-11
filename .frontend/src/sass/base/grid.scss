@@ -1,0 +1,56 @@
+//============================================
+// Grid
+//============================================
+
+
+// Grid
+//============================================
+
+$grid-columns: 12;
+
+$grid-config-xs: (
+  "name": "xs",
+  "cols": $grid-columns,
+  "gutter": $layout-gutter-xs,
+  "bp": false,
+  "off": false,
+  "pull": false,
+  "push": false,
+  "clear": 2
+);
+
+$grid-config-sm: (
+  "name": "sm",
+  "cols": $grid-columns,
+  "gutter": $layout-gutter-sm,
+  "bp": $bp-sm,
+  "off": true,
+  "pull": true,
+  "push": true,
+  "clear": 2
+);
+
+$grid-config-md: (
+  "name": "md",
+  "cols": $grid-columns,
+  "gutter": $layout-gutter-md,
+  "bp": $bp-md,
+  "off": true,
+  "pull": true,
+  "push": true,
+  "clear": 3 4
+);
+
+$grid-config-lg: (
+  "name": "lg",
+  "cols": $grid-columns,
+  "gutter": $layout-gutter-lg,
+  "bp": $bp-lg,
+  "off": true,
+  "pull": true,
+  "push": true,
+  "clear": 3 4
+);
+
+// init the grid
+@include grid($grid-config-xs, $grid-config-sm, $grid-config-md, $grid-config-lg);

@@ -33,7 +33,7 @@ gulp.task('watch',
 
   // Sass watcher
   gulp.watch(
-    config.sass.src,
+    config.sass.srcAll,
     gulp.parallel(sass)
   ),
 

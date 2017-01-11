@@ -50,25 +50,25 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"]
-  -webkit-appearance: none
-  outline: 0
   width: 100%
+  padding: $space-quarter
+  transition: box-shadow .2s
+  border: 1px solid $gray-light
+  border-radius: 0
+  outline: 0
+  background: $white
   color: inherit
   font-family: inherit
   font-size: inherit
   font-weight: inherit
-  line-height: $lh
-  border: 1px solid $gray-light
-  border-radius: 0
-  background: white
-  padding: $space-quarter
-  transition: box-shadow .2s
+  line-height: $line-height
+  -webkit-appearance: none
 
   &.disabled,
   &[disabled]
     background: $gray-light
-    cursor: default
     color: $gray
+    cursor: default
 
   &:focus
     box-shadow: 0 0 5px 0 rgba(black, .2)
@@ -86,9 +86,9 @@ select[multiple]
 //============================================
 
 textarea
-  vertical-align: top
   height: auto
   min-height: 100px
+  vertical-align: top
   resize: vertical
 
 
@@ -99,7 +99,7 @@ input[type="radio"],
 input[type="checkbox"]
   margin: 0 $space-quarter 0 0
   line-height: inherit
-  vertical-align: baseline
+  vertical-align: text-top
 
 
 
@@ -111,10 +111,10 @@ input[type="checkbox"]
 // Webkit
 @media screen and (-webkit-min-device-pixel-ratio: 0)
   select
+    padding-right: 26px
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTkiIGhlaWdodD0iNSIgdmlld0JveD0iMCAwIDE5IDUiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE5IDUiIHhtbDpzcGFjZT0icHJlc2VydmUiPiAgPHBvbHlnb24gZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIHBvaW50cz0iMCwwIDQuNSw1IDksMCAiLz48L3N2Zz4=)
     background-repeat: no-repeat
     background-position: right center
-    padding-right: 26px
 
   select[multiple]
     padding: 0

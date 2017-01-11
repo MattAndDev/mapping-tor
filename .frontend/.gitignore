@@ -3,5 +3,4 @@ Desktop.ini
 node_modules
 npm-debug.log
 dist/
-src/sass/_sprite.scss
-keys.json
+src/sass/base/sprite.scss

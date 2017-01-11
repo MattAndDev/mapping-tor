@@ -39,9 +39,6 @@
     $gutter-lft:  ceil(map-get($config, "gutter") / 2)
     $gutter-rgt:  floor(map-get($config, "gutter") / 2)
 
-    @if str-length($name) != 0
-      $name: "-#{$name}"
-
     // Base unit
     $base: (100%/$cols)
 
@@ -55,7 +52,7 @@
       // Clear
       @if map-get($config, "clear")
         @each $col in map-get($config, "clear")
-          .g#{$name}-clear-#{$col}
+          .g-#{$name}-clear-#{$col}
             .g:nth-child(#{$col}n+1)
               clear: left
             .g:not(:nth-child(#{$col}n+1))
@@ -68,7 +65,7 @@
 
       // Units
       @for $i from 1 through $cols
-        .g#{$name}-#{$i}
+        .g-#{$name}-#{$i}
           width: $base * $i
 
 

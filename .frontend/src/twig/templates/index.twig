@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-{% include '../includes/head.twig'%}
-<body >
-  <div class="map" style="width: 100vw; height: 100vh;">
 
-  </div>
-  {% include '../includes/scripts.twig' %}
-</body>
+  {% include '../includes/head.twig'%}
 
+  <body>
+    <div class="u-cw">
 
+      <div class="g-row">
+
+        <div class="g g-sm-6">
+          <h1>Home</h1>
+          <p>Hello world! This is a test paragraph</p>
+          <p>This is a test icon: &nbsp; {% include '../components/icon.twig' with { icon: 'facebook' } %}</p>
+        </div>
+
+        <div class="g g-sm-6">
+          <p>This is a test image</p>
+          <img src="images/test.png" alt="">
+        </div>
+
+      </div>
+    </div>
+
+    {% include '../includes/scripts.twig' %}
+
+  </body>
 </html>

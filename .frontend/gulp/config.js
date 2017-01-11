@@ -1,4 +1,4 @@
-var dest = '../public'
+var dest = './dist'
 var src = './src'
 
 export default {
@@ -14,12 +14,18 @@ export default {
 
 
   browserify: {
+
+    // watcher config
     src: src + '/js/*.js',
     srcAll: src + '/js/**/*.js',
     dest: dest + '/js/',
-    config: {
 
+    // browserify config
+    config: {
+      debug: true
     },
+
+    // babel config
     babel: {
       presets: ['es2015'],
       plugins: ['transform-class-properties']
@@ -63,7 +69,6 @@ export default {
     dest: dest + '/images',
 
     // gulp-imagemin settings
-
     options: {
     }
   },
@@ -98,10 +103,11 @@ export default {
   // ==============================
 
   sass: {
-    src: src + '/sass/**/*.{sass,scss}',
+    src: src + '/sass/*.{sass,scss}',
+    srcAll: src + '/sass/**/*.{sass,scss}',
     dest: dest + '/css',
 
-    // gulp-autoprefixer settings
+    // postcss-autoprefixer settings
 
     prefix: [
       'ie >= 9',
@@ -116,10 +122,13 @@ export default {
     ],
 
     // gulp-sass settings
-
     settings: {
       indentedSyntax: true, // Enable .sass syntax!
-      imagePath: 'images' // Used by the image-url helper
+      imagePath: 'images', // Used by the image-url helper,
+      // add external dependencies
+      includePaths: [
+        './node_modules/normalize.css'
+      ]
     }
   },
 
@@ -144,7 +153,7 @@ export default {
           render: {
             scss: {
               template: 'gulp/tpl/_sprite-inline.scss',
-              dest: '../../src/src/sass/_sprite.scss'
+              dest: '../../src/sass/base/sprite.scss'
             }
           }
         }
