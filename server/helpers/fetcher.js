@@ -27,8 +27,29 @@ class Fetcher extends EventEmitter {
 
   // init function
   init () {
-    // startby schedulign first new exit nodes
-    this.scheduleNewExitNode()
+
+    this.testTor(() => {
+      this.scheduleNewExitNode()
+    })
+  }
+
+
+  testTor (cb) {
+    tor.request('http://www.google.com',  (err, res) => {
+      if (!err) {
+      }
+      else {
+        // console.log(err);
+        // if failying means no control port acces is granted
+        // this is mandatory for the app to work
+        // critical error and shutting down
+        let error = new Error(
+          err.message + ` \nCannot connect to TOR. \nApplication shutting down!`
+        )
+        console.log(error);
+        process.exit(0);
+      }
+    })
   }
 
   // Ip geo localizer
@@ -96,18 +117,22 @@ class Fetcher extends EventEmitter {
   _requestNewExitNode () {
 
     // call the tor request helper
-    tor.renewTorSession((done) => {
+    tor.renewTorSession((err) => {
 
-      if (!done) {
+      if (!err) {
         // if done is null, new node is there
         // geo localize the ip
         this._getLocalizeIp()
       }
       else {
-        // something went wrong
-        // some error handling should be done here
-        // probably some configuration is wrong
-        process.exit(1);
+        // if failying means no control port acces is granted
+        // this is mandatory for the app to work
+        // critical error and shutting down
+        let error = new Error(
+          err.message + ` \nControl port access is required. \nApplication shutting down!`
+        )
+        console.log(error);
+        process.exit(0);
       }
     })
   }
