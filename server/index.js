@@ -25,42 +25,27 @@ class MappingTor {
 
     // init the server
     server.init()
+    // init the fetcher
     fetcher.init()
-
+    // add the event listeners
     this.addListeners()
   }
 
   addListeners () {
+
     fetcher.on('fetched', (err, entry) => {
-      console.log(entry);
       if (!err) {
-        this.handleNewExitNode(entry)
+        db.handleNewExitNode(this.collection, entry)
         fetcher.scheduleNewExitNode()
       }
       else {
+        console.log('Fetcher reported an errr')
+        console.log(err)
         fetcher.scheduleNewExitNode()
       }
     })
   }
 
-
-  // TODO move on here :D
-  handleNewExitNode (entry) {
-    db.readCollection(this.collection, (collection) => {
-      let check = _.find(collection, (o) => {  return o.ip === entry.ip;})
-      // if entry does not exist
-      console.log(check);
-      // use an update against the ip
-      if (typeof check !== 'undefined') {
-      }
-      // insert new entry
-      else {
-        db.appendToCollection(this.collection, entry, (result) => {
-          // console.log(result);
-        })
-      }
-    })
-  }
 
 }
 

@@ -12,7 +12,7 @@ class Db extends EventEmitter {
     super()
   }
 
-  // reads the colelction with the given name
+  // reads the collection with the given name
   // callback passes the complete collection
   readCollection (name, cb) {
     this._openConnection(() => {
@@ -25,15 +25,48 @@ class Db extends EventEmitter {
      })
   }
 
+  // TODO: needs to be refactored
+  // check if update one is working
+  handleNewExitNode (collection, entry) {
+    this.readCollection(collection, (data) => {
+      let check = _.find(data, (o) => {  return o.ip === entry.ip;})
+      // if entry does not exist
+      // use an update against the ip
+      if (typeof check !== 'undefined') {
+        let count = check.count + 1
+        this.updateCollectionEntry(collection,check._id, count, () => {
+          console.log('done');
+        })
+      }
+      // insert new entry
+      else {
+        console.log('new entry');
+        this.appendToCollection(collection, entry, (result) => {
+          // console.log(result);
+        })
+      }
+    })
+  }
 
   appendToCollection (name, entry, cb) {
     let collection = this.db.collection(name);
-    console.log(collection.length);
+    // console.log(collection.length);
     collection.insert(entry, (err, result) => {
       cb(result);
-      console.log(collection.length);
+      // console.log(collection.length);
       this.db.close()
     });
+  }
+
+  updateCollectionEntry (name, id, count,cb) {
+    let collection = this.db.collection(name);
+    // console.log(collection.length);
+    collection.updateOne({ _id : id } , { $set: { count : count } }, (err, result) => {
+     console.log(`Updated entry with id ${id} to count ${count}` );
+     cb(result);
+     // console.log(collection.length);
+     this.db.close()
+    })
   }
 
   // insert an array into the passed collection
@@ -79,7 +112,7 @@ class Db extends EventEmitter {
     _openConnection (cb) {
       Mongodb.connect(env.mongoDb.endpoint, (err, db) => {
         if (err) {
-          console.log(err)
+          // console.log(err)
         }
         this.db = db
         cb()

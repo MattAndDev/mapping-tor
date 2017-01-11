@@ -39,12 +39,12 @@ class Server {
 
     // listen to connection event
     this.handler.on('connection', () => {
-      console.log('connection')
+      // console.log('connection')
     })
 
     //binding port listener, proxied by nginx
     this.handler.listen(8080, () => {
-      console.log('listened')
+      // console.log('listened')
     })
 
   }
